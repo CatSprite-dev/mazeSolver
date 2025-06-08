@@ -1,5 +1,6 @@
 import unittest
 from maze import Maze
+from graphics import Cell
 
 class Tests(unittest.TestCase):
     def test_maze_create_cells(self):
@@ -36,6 +37,16 @@ class Tests(unittest.TestCase):
             m1._Maze__cells[m1._Maze__num_cols-1][m1._Maze__num_rows-1].has_bottom_wall,
             False
         )
+    
+    def test_reset_cells_visited(self):
+        num_cols = 12
+        num_rows = 10
+        m1 = Maze(0, 0, num_rows, num_cols, 10, 10)
+        m1._Maze__break_walls_r(0, 0)
+        m1._Maze__reset_cells_visited()
+        for i in range(m1._Maze__num_cols):
+            for j in range(m1._Maze__num_rows):
+                self.assertEqual(m1._Maze__cells[i][j].visited, False)
 
 if __name__ == "__main__":
     unittest.main()
