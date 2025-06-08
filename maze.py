@@ -51,7 +51,7 @@ class Maze():
     def __animate(self):
         if self.__win is None:
             return
-        tm.sleep(0.05)
+        tm.sleep(0.025)
         self.__win.redraw()
 
     def __break_entrance_and_exit(self):
@@ -68,18 +68,32 @@ class Maze():
 
         while True:
             possible_dir = []
-            
+            if i != self.__num_cols - 1 and self.__cells[i+1][j].visited == False:
+                possible_dir.append((i+1, j))
+            if j != self.__num_rows - 1 and self.__cells[i][j+1].visited == False:
+                possible_dir.append((i, j+1))
+            if i != 0 and self.__cells[i-1][j].visited == False:
+                possible_dir.append((i-1, j))
+            if j != 0 and self.__cells[i][j-1].visited == False:
+                possible_dir.append((i, j-1))
 
             if len(possible_dir) == 0:
                 self.__draw_cell(i, j)
                 return
-    
+            
             new_current = random.choice(possible_dir)
             new_i = new_current[0]
             new_j = new_current[1]
-            if new_i > i:
+
+            if new_i == i + 1 and new_j == j:
                 current.has_right_wall = False
-                self.__draw_cell(i, j)
+            if new_i == i and new_j == j + 1:
+                current.has_bottom_wall = False
+            if new_i == i - 1 and new_j == j:
+                current.has_left_wall = False
+            if new_i == i and new_j == j - 1:
+                current.has_top_wall = False
+            
             self.__break_walls_r(new_i, new_j)
 
                 

@@ -74,7 +74,7 @@ class Cell():
             self.__win.draw_line(left_wall, "black")
         else:
             left_wall = Line(Point(x1, y1), Point(x1, y2))
-            self.__win.drae_line(left_wall, "white")
+            self.__win.draw_line(left_wall, "white")
 
         if self.has_right_wall:
             right_wall = Line(Point(x2, y1), Point(x2, y2))
