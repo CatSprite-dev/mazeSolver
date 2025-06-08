@@ -68,35 +68,18 @@ class Maze():
 
         while True:
             possible_dir = []
-            try:
-                if self.__cells[i+1][j].visited == False:
-                    to_visit_cell = self.__cells[i+1][j]
-                    possible_dir.append([i+1, j])
-            except:
-                continue
-            """
-            if self.__cells[i][j+1].visited == False:
-                to_visit_cell = self.__cells[i][j+1]
-                possible_dir.append([i, j+1])
-            if self.__cells[i-1][j].visited == False:
-                to_visit_cell = self.__cells[i-1][j]
-                possible_dir.append([i-1, j])
-            if self.__cells[i][j-1].visited == False:
-                to_visit_cell = self.__cells[i][j-1]
-                possible_dir.append([i, j-1])
-            """
+            
+
             if len(possible_dir) == 0:
                 self.__draw_cell(i, j)
                 return
-            print(len(possible_dir))
-
+    
             new_current = random.choice(possible_dir)
             new_i = new_current[0]
             new_j = new_current[1]
             if new_i > i:
                 current.has_right_wall = False
                 self.__draw_cell(i, j)
-            print(new_i, new_j)
             self.__break_walls_r(new_i, new_j)
 
                 
